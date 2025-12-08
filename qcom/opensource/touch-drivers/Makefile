@@ -2,9 +2,9 @@ KBUILD_OPTIONS += TOUCH_ROOT=$(KERNEL_SRC)/$(M)
 KBUILD_OPTIONS += MODNAME?=touch_dlkm
 
 #KBUILD_EXTRA_SYMBOLS += $(M)/../display-drivers/msm/dsi/Module.symvers
-KBUILD_EXTRA_SYMBOLS +=$(OUT)/obj/sm6225_modules/qcom/opensource/display-drivers/msm/dsi/Module.symvers
+KBUILD_EXTRA_SYMBOLS +=$(OUT)/obj/sm6225-modules/qcom/opensource/display-drivers/msm/dsi/Module.symvers
 ifeq ($(SEC_SAMSUNG_EXPERIENCE_PLATFORM_CATEGORY), sep_lite_new)
-	KBUILD_EXTRA_SYMBOLS += drivers/samsung/bsp/class/Module.symvers
+	KBUILD_EXTRA_SYMBOLS += $(KERNEL_SRC)/drivers/samsung/bsp/class/Module.symvers
 endif
 export KBUILD_EXTRA_SYMBOLS
 
