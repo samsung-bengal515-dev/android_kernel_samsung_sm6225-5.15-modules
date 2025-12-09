@@ -340,6 +340,7 @@ enum cnss_recovery_reason {
 	CNSS_REASON_LINK_DOWN,
 	CNSS_REASON_RDDM,
 	CNSS_REASON_TIMEOUT,
+	CNSS_REASON_FW_ASSERTION_FAIL,
 };
 
 enum cnss_fw_caps {
@@ -436,6 +437,7 @@ extern int cnss_get_mem_seg_count(enum cnss_remote_mem_type type, u32 *seg);
 extern int cnss_get_mem_segment_info(enum cnss_remote_mem_type type,
 				     struct cnss_mem_segment segment[],
 				     u32 segment_count);
+extern bool cnss_get_audio_shared_iommu_group_cap(struct device *dev);
 extern int cnss_audio_smmu_map(struct device *dev, phys_addr_t paddr,
 			       dma_addr_t iova, size_t size);
 extern void cnss_audio_smmu_unmap(struct device *dev, dma_addr_t iova,
@@ -451,6 +453,7 @@ extern int cnss_send_buffer_to_afcmem(struct device *dev, const uint8_t *afcdb,
 extern int cnss_reset_afcmem(struct device *dev, uint8_t slotid);
 extern bool cnss_get_fw_cap(struct device *dev, enum cnss_fw_caps fw_cap);
 extern bool cnss_audio_is_direct_link_supported(struct device *dev);
+extern bool cnss_ipa_wlan_shared_smmu_supported(struct device *dev);
 extern int cnss_set_wfc_mode(struct device *dev, struct cnss_wfc_cfg cfg);
 extern int cnss_thermal_cdev_register(struct device *dev,
 				      unsigned long max_state,
@@ -462,4 +465,8 @@ extern int cnss_get_curr_therm_cdev_state(struct device *dev,
 extern int cnss_update_time_sync_period(struct device *dev,
 					 uint32_t time_sync_period);
 extern int cnss_reset_time_sync_period(struct device *dev);
+extern int cnss_register_driver_async_data_cb(struct device *dev, void *cb_ctx,
+					      int (*cb)(void *ctx,
+					      uint16_t type, void *event,
+					      int event_len));
 #endif /* _NET_CNSS2_H */
